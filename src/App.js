@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useMemo } from 'react';
+import React, { useState, useEffect, useMemo, useCallback } from 'react';
 import logo from './assets/rocket.svg';
 import astronaut from './assets/astronaut.svg';
 import './App.css';
@@ -6,10 +6,11 @@ import './App.css';
 function App() {
   const [techs, setTechs] = useState(['ReactJS', 'React Native']);
   const [newTech, setNewTech] = useState('');
-  function handleAdd() {
+
+  const handleAdd = useCallback(() => {
     setTechs([...techs, newTech]);
     setNewTech('');
-  }
+  }, [newTech, techs]);
 
   useEffect(() => {
     const storageTech = localStorage.getItem('techs');
