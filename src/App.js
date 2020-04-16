@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import logo from './assets/rocket.svg';
 import astronaut from './assets/astronaut.svg';
 import './App.css';
@@ -23,6 +23,8 @@ function App() {
     localStorage.setItem('techs', JSON.stringify(techs));
   }, [techs]);
 
+  const techSize = useMemo(() => techs.length, [techs]);
+
   return (
     <>
       <div className="App">
@@ -34,6 +36,7 @@ function App() {
             <li key={t}> {t}</li>
           ))}
         </ul>
+        <strong>You have {techSize} technologies</strong>
         <p>
           <input value={newTech} onChange={e => setNewTech(e.target.value)} />
         </p>
